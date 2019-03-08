@@ -22,18 +22,16 @@ public class ReceiveLogsTopic1
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        //		����һ��ƥ��ģʽ�Ľ�����
+        //		声明一个匹配模式的交换器
         channel.exchangeDeclare(EXCHANGE_NAME, "topic");
         String queueName = channel.queueDeclare().getQueue();
-        // ·�ɹؼ���
+        // 路由关键字
         String[] routingKeys = new String[]{"*.orange.*"};
-        //		��·�ɹؼ���
-        for (String bindingKey : routingKeys)
-        {
+        //		绑定路由关键字
+        for (String bindingKey : routingKeys) {
             channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
-            System.out.println("ReceiveLogsTopic1 exchange:" + EXCHANGE_NAME + ", queue:" + queueName + ", BindRoutingKey:" + bindingKey);
+            System.out.println("ReceiveLogsTopic1 exchange:"+EXCHANGE_NAME+", queue:"+queueName+", BindRoutingKey:" + bindingKey);
         }
-
         System.out.println("ReceiveLogsTopic1 [*] Waiting for messages. To exit press CTRL+C");
 
         Consumer consumer = new DefaultConsumer(channel)
