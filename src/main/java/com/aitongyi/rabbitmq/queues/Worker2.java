@@ -57,7 +57,7 @@ public class Worker2
     {
         try
         {
-            Thread.sleep(1000); // 暂停1秒钟
+            Thread.sleep(10); // 暂停1秒钟
         }
         catch (InterruptedException _ignored)
         {
